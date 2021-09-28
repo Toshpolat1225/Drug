@@ -12,8 +12,6 @@ const router = Router()
 const transporter = nodemailer.createTransport(sendgrid({
     auth: { api_key: keys.SENDGRID_API_KEY }
 }))
-
-
 router.get("/login", async(req, res) => {
     res.render("auth/login", {
         title: "Авторизация",
@@ -83,12 +81,19 @@ router.post("/register", async(req, res) => {
         console.log(e)
     }
 })
+
+
+
 router.get("/reset", async(req, res) => {
     res.render("auth/reset", {
         title: "Reset",
         error: req.flash("error"),
     })
 })
+
+
+
+
 router.post("/reset", (req, res) => {
     try {
         crypto.randomBytes(32, async(err, buffer) => {
@@ -104,7 +109,7 @@ router.post("/reset", (req, res) => {
                 candidate.resetTokenExp = Date.now() + 3600000
                 await candidate.save()
                 await transporter.sendMail(resetEmail(candidate.email, token))
-                await transporter.sendMail()
+                res.redirect("/auth/login")
             } else {
                 req.flash("error", "No email")
                 res.redirect("/auth/reset")
@@ -114,4 +119,34 @@ router.post("/reset", (req, res) => {
         console.log(err);
     }
 })
+
+
+
+router.get("/password/:token", async(req, res) => {
+    if (!req.params.token) {
+        return res.redirect("/auth/login")
+    }
+    try {
+        const user = await User.findOne({
+            resetToken: req.params.token,
+            resetTokenExp: { $gt: Date.now() }
+        })
+        if (!user) {
+            return res.redirect("/auth/login")
+        } else {
+            res.render("auth/password", {
+                title: "New password",
+                error: req.flash("error"),
+                userId: user._id.toString(),
+                token: req.params.token
+            })
+        }
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
 module.exports = router
