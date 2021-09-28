@@ -1,0 +1,102 @@
+<div class="auth">
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s6"><a class="active" href="#login">Войти</a></li>
+                <li class="tab col s6"><a href="#register">Регистрация</a></li>
+            </ul>
+        </div>
+        <div id="login" class="col s6 offset-s3">
+
+            {{#if loginError}}
+            <h4 style="text-align: center; color:red" class="alert">{{loginError}}</h4>
+            {{/if}} 
+
+
+            <h2 style="text-align: center; color:blue">Войти в аптека</h2>
+            <hr>
+            <form class="addhbs" action="/auth/login" method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" required name="email" />
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="Введите email"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="phone" type="number" class="validate" required name="phone" />
+                        <label for="phone">Номер телефона</label>
+                        <span class="helper-text" data-error="Введите номер телефона"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" required name="password" />
+                        <label for="password">Парол</label>
+                        <span class="helper-text" data-error="Введите парол"></span>
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+
+                    <p><a href="/auth/reset">Reset password</a></p>
+
+                    <button class="btn btn-primary" type="submit">Войти</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div id="register" class="col s6 offset-s3">
+
+            {{#if registerError}}
+            <h4 style="text-align: center; color:red" class="alert">{{registerError}}</h4>
+            {{/if}}
+
+            <h2 style="text-align: center; color:blue">Создать аккаунт</h2>
+            <hr>
+            <form class="addhbs" action="/auth/register" method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" type="text" class="validate" required name="name" />
+                        <label for="name">Ваше имя</label>
+                        <span class="helper-text" data-error="Введите имя"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="remail" type="email" class="validate" required name="email" />
+                        <label for="remail">Email</label>
+                        <span class="helper-text" data-error="Введите email"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="rphone" type="number" class="validate" required name="phone" />
+                        <label for="rphone">Номер телефона</label>
+                        <span class="helper-text" data-error="Введите номер телефона"></span>
+                    </div>
+
+
+                    <div class="input-field col s12">
+                        <input id="rpassword" type="password" class="validate" required name="password" />
+                        <label for="rpassword">Парол</label>
+                        <span class="helper-text" data-error="Введите парол"></span>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="confirm" type="password" class="validate" required name="confirm" />
+                        <label for="confirm">Парол еще раз</label>
+                        <span class="helper-text" data-error="Введите парол"></span>
+                    </div>
+
+
+
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+
+
+
+                    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

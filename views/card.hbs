@@ -1,0 +1,46 @@
+<h1>Корзина</h1>
+<hr>
+<div id="card">
+  {{#if drugs.length}}
+    <table>
+      <thead>
+        <th>sort</th>
+        <th>Лекарство</th>
+        <th>Страна</th>
+        <th>Количество</th>
+        <th>Штука</th>
+        <th>Действие</th>
+      </thead>
+      <tbody>
+        {{#each drugs}}
+          <tr>
+            <th>{{sort}}</th>
+            <th>{{model}}</th>
+            <th>{{country}}</th>
+            <th>{{amount}}</th>
+            <th>{{count}}</th>
+            <th>
+              <button
+                type="submit"
+                class="btn btn-small js-remove"
+                data-id="{{id}}"
+                data-csrf="{{@root.csrf}}"
+              >Удалить</button>
+            </th>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <p><strong>Итоговая цена:</strong><span class="price">{{price}}</span></p>
+
+    <form action="/orders" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="btn">Сделать заказ</button>
+    </form>
+  {{else}}
+    <div class="empty">
+      <p>Корзина пусто</p>
+    </div>
+  {{/if}}
+</div>

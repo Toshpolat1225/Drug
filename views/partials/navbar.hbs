@@ -1,0 +1,52 @@
+<nav class="navbar">
+  <div class="nav-wrapper blue">
+    <a href="/" class="brand-logo"><i class="material-icons">loupe</i></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {{#if isHome}}
+      <li class="active"><a href="/">Основной</a></li>
+      {{else}}
+      <li><a href="/">Основной</a></li>
+      {{/if}}
+
+      {{#if isdDrugs}}
+      <li class="active"><a href="/drugs">Лекарственное средство</a></li>
+      {{else}}
+      <li><a href="/drugs">Лекарственное средство</a></li>
+      {{/if}}
+
+      {{#if isAuth}}
+
+      {{#if isAdd}}
+      <li class="active"><a href="/add">Добавить лекарство</a></li>
+      {{else}}
+      <li><a href="/add">Добавить лекарство</a></li>
+      {{/if}}
+
+      {{#if isCard}}
+      <li class="active"><a href="/card">Корзина</a></li>
+      {{else}}
+      <li><a href="/card">Корзина</a></li>
+      {{/if}}
+      {{#if isOrder}}
+      <li class="active"><a href="/orders">Заказы</a></li>
+      {{else}}
+      <li><a href="/orders">Заказы</a></li>
+      {{/if}}
+
+       <li><a href="/auth/logout">Выйти</a></li>
+
+      {{else}}
+      {{#if isLogin}}
+      <li class="active"><a href="/auth/login#login">Войти</a></li>
+      {{else}}
+      <li><a href="/auth/login#login">Войти</a></li>
+      {{/if}}
+
+      {{/if}}
+
+
+
+
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,48 @@
+<h1>Добавить лекарство</h1>
+<hr>
+<form class="addhbs" action="/add" method="POST">
+  <div class="row">
+    <div class="input-field col s12">
+      <input id="sort" type="text" class="validate" required name="sort" />
+      <label for="sort">sort</label>
+      <span class="helper-text" data-error="sort"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="model" type="text" class="validate" required name="model"/>
+      <label for="model">Названий лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Напишите названия лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="amount" type="number" class="validate" required min="1" name="amount"/>
+      <label for="amount">Количество на лекарственные средства</label>
+      <span class="helper-text" data-error="Напишите количество лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="price" type="number" class="validate" required min="1" name="price"/>
+      <label for="price">Цену на лекарственные средства</label>
+      <span class="helper-text" data-error="Напишите цену лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="country" type="text" class="validate" required name="country" />
+      <label for="country">Страна лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Показываете страна лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="img1" type="text" class="validate" required name="img1" />
+      <label for="img1">Рисунок лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="img2" type="text" class="validate" name="img2" />
+      <label for="img2">Рисунок лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="img3" type="text" class="validate" name="img3" />
+      <label for="img3">Рисунок лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
+    </div>
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button class="btn btn-primary">Отправить</button>
+  </div>
+</form>

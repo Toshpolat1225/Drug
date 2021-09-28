@@ -1,0 +1,26 @@
+
+
+
+<div class="drug">
+  {{#each drugs}}
+    <img src="{{img1}}" alt="">
+  {{/each}}
+  <h1>{{drug.model}}</h1>
+  <div class="swiper-container mySwiper content_swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="{{drug.img1}}" alt="" /></div>
+      <div class="swiper-slide"><img src="{{drug.img2}}" alt="" /></div>
+      <div class="swiper-slide"><img src="{{drug.img3}}" alt="" /></div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+
+
+
+  <p class="content_text">sort: {{drug.sort}}</p>
+  <p class="content_text">Количество: {{drug.amount}}</p>
+  <p class="content_text">Страна: {{drug.country}}</p>
+  <hr>
+  <p class="price big">{{drug.price}}</p>
+</div>

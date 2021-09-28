@@ -1,0 +1,35 @@
+<div class="row">
+  <div  class="col s6 offset-s3">
+
+    {{#if error}}
+      <h4
+        style="text-align: center; color:red"
+        class="alert"
+      >{{error}}</h4>
+    {{/if}}
+
+    <h2 style="text-align: center; color:blue">Reset Password</h2>
+    <hr />
+    <form class="addhbs" action="/auth/reset" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input
+            id="email"
+            type="email"
+            class="validate"
+            required
+            name="email"
+          />
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="Введите email"></span>
+        </div>
+
+
+        <input type="hidden" name="_csrf" value="{{csrf}}" />
+
+        <button class="btn btn-primary" type="submit">Reset</button>
+      </div>
+    </form>
+  </div>
+
+</div>

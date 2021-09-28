@@ -1,0 +1,47 @@
+<h1 style="text-align: center; color:blue">Лекарственные препараты</h1>
+<hr>
+{{#if drugs.length}}
+{{! massiv }}
+<div class="row">
+  {{#each drugs}}
+  <div class="col s4">
+    <div class="card">
+      <div class="card-image">
+        <div class="swiper-container mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="{{img1}}" alt="" /></div>
+            <div class="swiper-slide"><img src="{{img2}}" alt="" /></div>
+            <div class="swiper-slide"><img src="{{img3}}" alt="" /></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <div class="cardName">
+          <span class="card-title">{{model}}</span>
+          <p>sort: {{sort}}</p>
+          <p>Количество: {{amount}}</p>
+          <p>Страна: {{country}}</p>
+        </div>
+        <p class="price">{{price}}</p>
+      </div>
+      <div class="card-action action">
+        <a href="/drugs/{{id}}" target="_blank">Посмотреть</a>
+        {{#if @root.isAuth}}
+        <a href="/drugs/{{id}}/edit?allow=true">Изменит</a>
+        <form action="/card/add" method="POST">
+          <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+          <input type="hidden" name="id" value="{{id}}" />
+          <button class="btn btn-primary">Купить</button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+
+  </div>
+  {{/each}}
+</div>
+{{else}}
+<p>Корзина пусто</p>
+{{/if}}

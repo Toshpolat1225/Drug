@@ -1,0 +1,76 @@
+<h1>Edit drug</h1>
+<form action="/drugs/edit" method="POST" class="drug-form">
+  <div class="row">
+    <div class="images_edit">
+        <img class="editimg" src="{{drug.img1}}" alt="">
+        <img class="editimg" src="{{drug.img2}}" alt="">
+        <img class="editimg" src="{{drug.img3}}" alt="">
+    </div>
+    <div class="input-field col s12">
+      <input id="sort" type="text" class="validate" required name="sort" />
+      <label for="sort">sort</label>
+      <span class="helper-text" data-error="sort"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="model" type="text" class="validate" required name="model" value="{{drug.model}}"/>
+      <label for="model">Названий лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Напишите названия лекарственных средств и препаратов"></span>
+    </div>
+
+
+
+    <div class="input-field col s12">
+      <input id="amount" type="number" class="validate" required value="{{drug.amount}}" name="amount"/>
+      <label for="amount">Количество на лекарственные средства</label>
+      <span class="helper-text" data-error="Напишите количество лекарственных средств и препаратов"></span>
+    </div>
+
+
+
+    <div class="input-field col s12">
+      <input
+        id="price"
+        type="number"
+        class="validate"
+        required
+        min="1"
+        name="price"
+        value="{{drug.price}}"
+      />
+      <label for="price">drug price</label>
+      <span class="helper-text" data-error="Write the drug price"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="country" type="text" class="validate" required name="country" />
+      <label for="country">Страна лекарственных средств и препаратов</label>
+      <span class="helper-text" data-error="Показываете страна лекарственных средств и препаратов"></span>
+    </div>
+
+<div class="input-field col s12">
+      <input id="img1" type="text" name="img1" class="validate" required value="{{drug.img1}}"/>
+      <label for="img1">House image (1)</label>
+      <span class="helper-text" data-error="write this"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="img2" type="text" name="img2" class="validate" value="{{drug.img2}}"/>
+      <label for="img2">House image (2)</label>
+      <span class="helper-text" data-error="write this"></span>
+    </div>
+    <div class="input-field col s12">
+      <input id="img3" type="text" name="img3" class="validate" value="{{drug.img3}}"/>
+      <label for="img3">House image (3)</label>
+      <span class="helper-text" data-error="write this"></span>
+    </div>
+
+
+
+    <input type="hidden" name="id" value="{{drug.id}}" />
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </div>
+</form>
+<form action="/drugs/remove" method="POST">
+  <input type="hidden" name="id" value={{drug.id}} />
+  <input type="hidden" name="_csrf" value="{{csrf}}">
+  <button class="btn red">Удалить</button>
+</form>
