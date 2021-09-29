@@ -9,6 +9,7 @@ const session = require("express-session")
 const MongoStore = require("connect-mongodb-session")(session)
 const varMiddleware = require("./middleware/variables")
 const userMiddleware = require("./middleware/user")
+const fileMiddleware = require("./middleware/file")
 const compression = require("compression")
 const errorHandler = require("./middleware/error")
     // routes
@@ -22,6 +23,7 @@ const profileRouter = require('./routes/profile')
 const keys = require("./keys")
     // public ulash jarayoni
 app.use(express.static(path.join(__dirname, 'public')))
+app.use("/images", express.static(path.join(__dirname, 'images')))
 
 // post registratsiya
 app.use(express.urlencoded({
@@ -37,6 +39,7 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }))
+app.use(fileMiddleware.single("avatar"))
 app.use(csrf())
 app.use(flash())
 app.use(compression())
