@@ -10,6 +10,7 @@ const MongoStore = require("connect-mongodb-session")(session)
 const varMiddleware = require("./middleware/variables")
 const userMiddleware = require("./middleware/user")
 const compression = require("compression")
+const errorHandler = require("./middleware/error")
 
 // routes
 const homeRouter = require('./routes/home')
@@ -48,7 +49,7 @@ const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs',
     helpers: require('./utils/hbs-helpers'),
-    runtimeOptions:{
+    runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtomethodsByDefault: true
     }
@@ -75,19 +76,22 @@ app.get('/contact', (req, res) => {
     })
 })
 
-
+app.use(errorHandler)
 
 const port = process.env.PORT || 3000;
 
-async function start(){
+async function start() {
     try {
-        await mongoose.connect(keys.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true,useFindAndModify: false
+        await mongoose.connect(keys.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false
         })
         app.listen(port, () => {
-        console.log(`Express working on ${port} port`);
-    })
+            console.log(`Express working on ${port} port`);
+        })
 
-    }catch(e){
+    } catch (e) {
         console.log(e, "index 54 hato")
     }
 }

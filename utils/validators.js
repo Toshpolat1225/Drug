@@ -31,3 +31,14 @@ exports.registerValidators = [
     .isLength({ min: 3 }).withMessage('Имя должно быть минимум 3 символа')
     .trim()
 ]
+
+exports.courseValidators = [
+    body('sort').isLength({ min: 1 }).withMessage('Минимальная длинна сорт 1 символа').trim(),
+    body('model').isLength({ min: 3 }).withMessage('Минимальная длинна названия 3 символа').trim(),
+    body('amount').isLength({ min: 3 }).withMessage('Минимальная длинна количество 3 символа').trim(),
+    body('country').isLength({ min: 1 }).withMessage('Минимальная длинна цена 1 символа').trim(),
+    body('price').isNumeric().withMessage('Введите корректную цену'),
+    body('img1', 'Введите корректный Url картинки').isURL(),
+    body('img2', 'Введите корректный Url картинки').isURL(),
+    body('img3', 'Введите корректный Url картинки').isURL(),
+]

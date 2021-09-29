@@ -1,44 +1,47 @@
 <h1>Добавить лекарство</h1>
+{{#if error}}
+<p class="error">{{error}}</p>
+{{/if}}
 <hr>
 <form class="addhbs" action="/add" method="POST">
   <div class="row">
     <div class="input-field col s12">
-      <input id="sort" type="text" class="validate" required name="sort" />
+      <input id="sort" type="text" class="validate" required name="sort" value="{{data.sort}}" />
       <label for="sort">sort</label>
       <span class="helper-text" data-error="sort"></span>
     </div>
     <div class="input-field col s12">
-      <input id="model" type="text" class="validate" required name="model"/>
+      <input id="model" type="text" class="validate" required name="model" value="{{data.model}}" />
       <label for="model">Названий лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Напишите названия лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="amount" type="number" class="validate" required min="1" name="amount"/>
+      <input id="amount" type="number" class="validate" required min="1" name="amount" value="{{data.amount}}" />
       <label for="amount">Количество на лекарственные средства</label>
       <span class="helper-text" data-error="Напишите количество лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="price" type="number" class="validate" required min="1" name="price"/>
+      <input id="price" type="number" class="validate" required min="1" name="price" value="{{data.price}}" />
       <label for="price">Цену на лекарственные средства</label>
       <span class="helper-text" data-error="Напишите цену лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="country" type="text" class="validate" required name="country" />
+      <input id="country" type="text" class="validate" required name="country" value="{{data.country}}" />
       <label for="country">Страна лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Показываете страна лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="img1" type="text" class="validate" required name="img1" />
+      <input id="img1" type="text" class="validate" required name="img1" value="{{data.img1}}"  />
       <label for="img1">Рисунок лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="img2" type="text" class="validate" name="img2" />
+      <input id="img2" type="text" class="validate" name="img2" value="{{data.img2}}" />
       <label for="img2">Рисунок лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
     </div>
     <div class="input-field col s12">
-      <input id="img3" type="text" class="validate" name="img3" />
+      <input id="img3" type="text" class="validate" name="img3" value="{{data.img3}}"  />
       <label for="img3">Рисунок лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Показываете лекарственных средств и препаратов"></span>
     </div>

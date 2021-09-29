@@ -1,9 +1,11 @@
 const {
     Router
 } = require('express')
+const { validationResult } = require('express-validator/check')
 const router = Router()
 const auth = require("../middleware/auth")
 const Drug = require('../models/Drugs')
+const { courseValidators } = require('../utils/validators')
 
 router.get('/', auth, (req, res) => {
     res.render('add', {
@@ -12,7 +14,28 @@ router.get('/', auth, (req, res) => {
     })
 })
 
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, courseValidators, async(req, res) => {
+    const errors = validationResult(req)
+
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('add', {
+            title: 'Добавить лекарство',
+            isAdd: true,
+            error: errors.array()[0].msg,
+            data: {
+                sort: req.body.sort,
+                model: req.body.model,
+                amount: req.body.amount,
+                country: req.body.country,
+                price: req.body.price,
+                img1: req.body.img1,
+                img2: req.body.img2,
+                img3: req.body.img3,
+            }
+        })
+    }
+
     const drug = new Drug({
         sort: req.body.sort,
         model: req.body.model,
@@ -24,10 +47,10 @@ router.post('/', auth, async (req, res) => {
         img3: req.body.img3,
         userId: req.user
     })
-    try{
+    try {
         await drug.save()
         res.redirect('/drugs')
-    }catch(e){
+    } catch (e) {
         console.log(e, "add js 24")
     }
 })

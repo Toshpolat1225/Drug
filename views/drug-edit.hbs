@@ -7,7 +7,7 @@
         <img class="editimg" src="{{drug.img3}}" alt="">
     </div>
     <div class="input-field col s12">
-      <input id="sort" type="text" class="validate" required name="sort" />
+      <input id="sort" type="text" class="validate" required name="sort" value="{{drug.sort}}"/>
       <label for="sort">sort</label>
       <span class="helper-text" data-error="sort"></span>
     </div>
@@ -16,17 +16,11 @@
       <label for="model">Названий лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Напишите названия лекарственных средств и препаратов"></span>
     </div>
-
-
-
     <div class="input-field col s12">
       <input id="amount" type="number" class="validate" required value="{{drug.amount}}" name="amount"/>
       <label for="amount">Количество на лекарственные средства</label>
       <span class="helper-text" data-error="Напишите количество лекарственных средств и препаратов"></span>
     </div>
-
-
-
     <div class="input-field col s12">
       <input
         id="price"
@@ -41,11 +35,10 @@
       <span class="helper-text" data-error="Write the drug price"></span>
     </div>
     <div class="input-field col s12">
-      <input id="country" type="text" class="validate" required name="country" />
+      <input id="country" type="text" class="validate" required name="country" value="{{data.country}}"/>
       <label for="country">Страна лекарственных средств и препаратов</label>
       <span class="helper-text" data-error="Показываете страна лекарственных средств и препаратов"></span>
     </div>
-
 <div class="input-field col s12">
       <input id="img1" type="text" name="img1" class="validate" required value="{{drug.img1}}"/>
       <label for="img1">House image (1)</label>
@@ -61,9 +54,6 @@
       <label for="img3">House image (3)</label>
       <span class="helper-text" data-error="write this"></span>
     </div>
-
-
-
     <input type="hidden" name="id" value="{{drug.id}}" />
     <input type="hidden" name="_csrf" value="{{csrf}}">
     <button type="submit" class="btn btn-primary">Edit</button>
