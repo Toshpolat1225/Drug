@@ -17,9 +17,15 @@
       {{#if isAuth}}
 
       {{#if isAdd}}
-      <li class="active"><a href="/add">Добавить лекарство</a></li>
+      <li class="active"><a href="/add"> лекарство</a></li>
       {{else}}
       <li><a href="/add">Добавить лекарство</a></li>
+      {{/if}}
+
+      {{#if isProfile}}
+      <li class="active"><a href="/profile">Profile</a></li>
+      {{else}}
+      <li><a href="/profile">Profile</a></li>
       {{/if}}
 
       {{#if isCard}}

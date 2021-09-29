@@ -95,7 +95,8 @@ body {
 .auth {
     padding-top: 2rem;
 }
-.alert{
+
+.alert {
     padding: 0.5rem 1rem;
     border-radius: 10px;
     text-align: center;
@@ -103,6 +104,12 @@ body {
     background-color: rgb(88, 2, 2);
     color: red;
 }
-.mySwiper{
+
+.mySwiper {
     overflow: hidden;
+}
+
+.avatar {
+    max-width: 300px;
+    height: auto;
 }

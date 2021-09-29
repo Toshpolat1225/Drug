@@ -18,6 +18,7 @@ const drugsRouter = require('./routes/drugs')
 const cardRouter = require('./routes/card')
 const ordersRouter = require('./routes/orders')
 const authRouter = require('./routes/auth')
+const profileRouter = require('./routes/profile')
 const keys = require("./keys")
     // public ulash jarayoni
 app.use(express.static(path.join(__dirname, 'public')))
@@ -61,6 +62,7 @@ app.use('/drugs', drugsRouter)
 app.use('/card', cardRouter)
 app.use('/orders', ordersRouter)
 app.use('/auth', authRouter)
+app.use('/profile', profileRouter)
 
 app.get('/contact', (req, res) => {
     res.render('contact', {
