@@ -11,8 +11,7 @@ const varMiddleware = require("./middleware/variables")
 const userMiddleware = require("./middleware/user")
 const compression = require("compression")
 const errorHandler = require("./middleware/error")
-
-// routes
+    // routes
 const homeRouter = require('./routes/home')
 const addRouter = require('./routes/add')
 const drugsRouter = require('./routes/drugs')
@@ -20,8 +19,7 @@ const cardRouter = require('./routes/card')
 const ordersRouter = require('./routes/orders')
 const authRouter = require('./routes/auth')
 const keys = require("./keys")
-
-// public ulash jarayoni
+    // public ulash jarayoni
 app.use(express.static(path.join(__dirname, 'public')))
 
 // post registratsiya
@@ -43,8 +41,7 @@ app.use(flash())
 app.use(compression())
 app.use(varMiddleware)
 app.use(userMiddleware)
-
-// hbs ulash jarayoni
+    // hbs ulash jarayoni
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs',
@@ -54,14 +51,10 @@ const hbs = exphbs.create({
         allowProtomethodsByDefault: true
     }
 })
-
-
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
-
-
-// use router
+    // use router
 app.use('/', homeRouter)
 app.use('/add', addRouter)
 app.use('/drugs', drugsRouter)
@@ -75,11 +68,8 @@ app.get('/contact', (req, res) => {
         isContact: true
     })
 })
-
 app.use(errorHandler)
-
 const port = process.env.PORT || 3000;
-
 async function start() {
     try {
         await mongoose.connect(keys.MONGODB_URI, {
