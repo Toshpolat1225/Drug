@@ -4,10 +4,13 @@ const auth = require('../middleware/auth')
 const router = Router()
 
 router.get('/', auth, async(req, res) => {
+    const user = await User.findById(req.user._id)
+    const image = user.avatarUrl
     res.render('profile', {
         title: 'Профиль',
         isProfile: true,
-        user: req.user.toObject()
+        user: req.user.toObject(),
+        image
     })
 })
 

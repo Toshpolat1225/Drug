@@ -23,7 +23,7 @@ const profileRouter = require('./routes/profile')
 const keys = require("./keys")
     // public ulash jarayoni
 app.use(express.static(path.join(__dirname, 'public')))
-app.use("/images", express.static(path.join(__dirname, 'images')))
+    //app.use("./public/images", express.static(path.join(__dirname, 'images')))
 
 // post registratsiya
 app.use(express.urlencoded({
