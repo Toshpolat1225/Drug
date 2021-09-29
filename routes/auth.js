@@ -3,12 +3,12 @@ const bcrypt = require("bcryptjs")
 const User = require("../models/user")
 const nodemailer = require('nodemailer')
 const sendgrid = require('nodemailer-sendgrid-transport')
+const {body, validationResult} = require("express-validator/check")
 const crypto = require("crypto")
 const keys = require('../keys')
 const regEmail = require('../emails/registration')
 const resetEmail = require('../emails/reset')
 const router = Router()
-
 const transporter = nodemailer.createTransport(sendgrid({
     auth: { api_key: keys.SENDGRID_API_KEY }
 }))
@@ -55,11 +55,16 @@ router.post("/login", async(req, res) => {
         console.log(e)
     }
 })
-router.post("/register", async(req, res) => {
+router.post("/register", body("email").isEmail(), async(req, res) => {
     try {
-        const { name, email, phone, password } = req.body
+        const { name, email, phone, password, confirm } = req.body
         console.log(req.body)
         const condidate = await User.findOne({ email })
+        const errors = validationResult(req)
+        if(errors.isEmpty()){
+            req.flash("registerError", errors.array()[0].msg)
+            return res.status(422).redirect("/auth/login#register")
+        }
         if (condidate) {
             req.flash("registerError", "Пользователь с таким email уже существует")
             res.redirect("/auth/login#register")
@@ -81,19 +86,12 @@ router.post("/register", async(req, res) => {
         console.log(e)
     }
 })
-
-
-
 router.get("/reset", async(req, res) => {
     res.render("auth/reset", {
         title: "Reset",
         error: req.flash("error"),
     })
 })
-
-
-
-
 router.post("/reset", (req, res) => {
     try {
         crypto.randomBytes(32, async(err, buffer) => {
@@ -119,9 +117,6 @@ router.post("/reset", (req, res) => {
         console.log(err);
     }
 })
-
-
-
 router.get("/password/:token", async (req, res) => {
     if (!req.params.token) {
         return res.redirect("/auth/login")
