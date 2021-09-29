@@ -21,17 +21,17 @@ const drugSchema = new Schema({
         required: true
     },
     img1: String,
-    userID:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
     },
     img2: String,
-    userID:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
     },
     img3: String,
-    userID:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
     }

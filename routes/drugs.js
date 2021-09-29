@@ -6,8 +6,7 @@ const Drug = require('../models/Drugs')
 const auth = require("../middleware/auth")
 
 function isOwner(drug, req) {
-   return drug.userId.toString() !== req.user._id.toString()
-    
+   return drug.userId.toString() === req.user._id.toString()
 }
 
 router.get('/', async (req, res) => {
@@ -15,24 +14,34 @@ router.get('/', async (req, res) => {
     const drugs = await Drug.find()
         .populate("userId", "email name")
         .select("sort model price img1 img2 img3 amount country")
+    const userId =  req.user ? req.user._id.toString(): null
+    console.log(drugs); //  [ {},  {},  {}]
+
     res.render('drugs', {
         title: 'Лекарственные препараты',
         isDrugs: true,
-        userId: req.user ? req.user._id.toString(): null,
+        userId,
         drugs // massiv
     })
     }catch(err){
         console.log(err);
     }
+    
 })
 
 router.get('/:id', async (req, res) => {
-    const drug = await Drug.findById(req.params.id) // obyekt
+    try {
+        const drug = await Drug.findById(req.params.id) // obyekt
     res.render('drug', {
         layout: 'empty',
         title: `Drug model ${drug.total}`,
         drug
     })
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
 })
 
 router.get('/:id/edit', auth, async (req, res) => {
@@ -73,7 +82,10 @@ router.post('/edit', auth, async (req, res) => {
 })
 router.post("/remove", auth, async (req, res)=>{
     try {
-        await Drug.deleteOne({_id: req.body.id})
+        await Drug.deleteOne({
+            _id: req.body.id,
+            userId: req.user._id
+            })
     res.redirect("/drugs")
     } catch(e){
         console.log(e, "drug js 48")

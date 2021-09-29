@@ -122,12 +122,13 @@ router.post("/reset", (req, res) => {
 
 
 
-router.get("/password/:token", async(req, res) => {
+router.get("/password/:token", async (req, res) => {
     if (!req.params.token) {
         return res.redirect("/auth/login")
     }
     try {
-        const user = await User.findOne({
+        async () => {
+            const user = await User.findOne({
             resetToken: req.params.token,
             resetTokenExp: { $gt: Date.now() }
         })
@@ -141,6 +142,9 @@ router.get("/password/:token", async(req, res) => {
                 token: req.params.token
             })
         }
+        }
+        
+        
 
 
     } catch (error) {
@@ -148,7 +152,7 @@ router.get("/password/:token", async(req, res) => {
     }
 
 })
-router.post("/password", (req, res) => {
+router.post("/password", async (req, res) => {
     try {
          const user = await User.findOne({
             _id: req.body.userId,

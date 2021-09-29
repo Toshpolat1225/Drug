@@ -24,7 +24,9 @@ router.get('/', auth, async (req, res) => {
     const user = await req.user
         .populate("cart.items.drugId")
         .execPopulate()
-    const drugs = mapCartItems(user.cart)
+
+    console.log(user.cart.items);
+    const drugs = await mapCartItems(user.cart)
 
     res.render('card', { 
         title: 'Корзина',

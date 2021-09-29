@@ -22,7 +22,7 @@ router.post('/', auth, async (req, res) => {
         img1: req.body.img1,
         img2: req.body.img2,
         img3: req.body.img3,
-        userID: req.user
+        userId: req.user
     })
     try{
         await drug.save()
