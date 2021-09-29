@@ -148,5 +148,48 @@ router.get("/password/:token", async(req, res) => {
     }
 
 })
+router.post("/password", (req, res) => {
+    try {
+         const user = await User.findOne({
+            _id: req.body.userId,
+            resetToken: req.params.token,
+            resetTokenExp: { $gt: Date.now() }
+        })
+        if (user) {
+            user.password = await bcrypt.hash(req.body.password, 10)
+            user.resetToken = undefined
+            user.resetTokenExp = undefined
+            await user.save()
+             res.redirect("/auth/login")
+        } else {
+            
+            req.flash("loginError", "Token Deadline")
+             res.redirect("/auth/login")
+
+        }
+
+        crypto.randomBytes(32, async(err, buffer) => {
+            if (err) {
+                req.flash("error", "Problema")
+                return res.redirect("/auth/reset")
+            }
+            const token = buffer.toString("hex")
+            const candidate = await User.findOne({ email: req.body.email })
+
+            if (candidate) {
+                candidate.resetToken = token
+                candidate.resetTokenExp = Date.now() + 3600000
+                await candidate.save()
+                await transporter.sendMail(resetEmail(candidate.email, token))
+                res.redirect("/auth/login")
+            } else {
+                req.flash("error", "No email")
+                res.redirect("/auth/reset")
+            }
+        })
+    } catch (err) {
+        console.log(err);
+    }
+})
 
 module.exports = router
