@@ -47,6 +47,7 @@ app.use(userMiddleware)
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs',
+    helpers: require('./utils/hbs-helpers'),
     runtimeOptions:{
         allowProtoPropertiesByDefault: true,
         allowProtomethodsByDefault: true

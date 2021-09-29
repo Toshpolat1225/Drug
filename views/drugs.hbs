@@ -29,7 +29,9 @@
       <div class="card-action action">
         <a href="/drugs/{{id}}" target="_blank">Посмотреть</a>
         {{#if @root.isAuth}}
-        <a href="/drugs/{{id}}/edit?allow=true">Изменит</a>
+        {{#ifeq userId._id  @root.userId}}
+          <a href="/drugs/{{id}}/edit?allow=true">Изменит</a>
+        {{/ifeq}}
         <form action="/card/add" method="POST">
           <input type="hidden" name="_csrf" value="{{@root.csrf}}">
           <input type="hidden" name="id" value="{{id}}" />

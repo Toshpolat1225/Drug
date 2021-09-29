@@ -5,15 +5,25 @@ const router = Router()
 const Drug = require('../models/Drugs')
 const auth = require("../middleware/auth")
 
+function isOwner(drug, req) {
+   return drug.userId.toString() !== req.user._id.toString()
+    
+}
+
 router.get('/', async (req, res) => {
+    try{
     const drugs = await Drug.find()
         .populate("userId", "email name")
         .select("sort model price img1 img2 img3 amount country")
     res.render('drugs', {
         title: 'Лекарственные препараты',
         isDrugs: true,
+        userId: req.user ? req.user._id.toString(): null,
         drugs // massiv
     })
+    }catch(err){
+        console.log(err);
+    }
 })
 
 router.get('/:id', async (req, res) => {
@@ -29,19 +39,37 @@ router.get('/:id/edit', auth, async (req, res) => {
     if (!req.query.allow) {
         res.redirect('/')
     }
-    const drug = await Drug.findById(req.params.id) // obyekt
+    try {
+        const drug = await Drug.findById(req.params.id) // obyekt
 
-    res.render('drug-edit', {
+            if(!isOwner(drug, req)){
+                return res.redirect("/drugs")
+            }
+
+        res.render('drug-edit', {
         title: `Редактировать`,
         drug
     })
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 router.post('/edit', auth, async (req, res) => {
-    const {id} = req.body
+    try {
+         const {id} = req.body
     delete req.body.id
-    await Drug.findByIdAndUpdate(id, req.body)
+    const drug = await Drug.findById(id)
+    if(!isOwner(drug, req)){
+        return res.redirect("/drugs")
+    }
+    Object.assign(drug, req.body)
+    await drug.save()
     res.redirect('/drugs')
+        
+    } catch (error) {
+        console.log(error);
+    }
 })
 router.post("/remove", auth, async (req, res)=>{
     try {
