@@ -5,7 +5,7 @@ const toCurresy = (price) => {
     }).format(price)
 }
 
-const toDate = date =>{
+const toDate = date => {
     return new Intl.DateTimeFormat("ru-RU", {
         day: "2-digit",
         month: "long",
@@ -73,15 +73,4 @@ if ($card) {
 }
 
 
-M.Tabs.init(document.querySelectorAll(".tabs"))
-
-
-
-
-
-
-
-
-
-
-
+M.Tabs.init(document.querySelectorAll(".tab"))

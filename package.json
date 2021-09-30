@@ -21,7 +21,6 @@
     "express-session": "^1.17.2",
     "express-validator": "^6.12.2",
     "git": "^0.1.5",
-    "helmet": "^4.6.0",
     "heroku": "^7.59.0",
     "moment": "^2.29.1",
     "mongoose": "^5.13.2",
