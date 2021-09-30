@@ -1,26 +1,25 @@
-const multer = require('multer')
-const moment = require('moment')
+const multer = require("multer");
+const moment = require("moment");
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '')
+    destination(req, file, cb) {
+        cb(null, "images");
     },
-    filename: (req, file, cb) => {
-        const date = moment().format('DDMMYYYY-HHmmss-sss')
-        cb(null, `${date}-${file.originalname}`)
-    }
-})
+    filename(req, file, cb) {
+        const date = moment().format("DDMMYYYY-HHmmss");
+        cb(null, `${date}-${file.originalname}`);
+    },
+});
 
-const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg']
+const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
 
 const fileFilter = (req, file, cb) => {
     if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true)
+        cb(null, true);
     } else {
-        cb(null, false)
+        cb(null, false);
     }
-}
-
+};
 module.exports = multer({
     storage,
     fileFilter,
