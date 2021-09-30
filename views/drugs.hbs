@@ -1,4 +1,4 @@
-<h1 style="text-align: center; color:blue">Лекарственные препараты</h1>
+<h1 style="text-align: center;">Лекарственные препараты</h1>
 <hr>
 {{#if drugs.length}}
 {{! massiv }}
@@ -25,20 +25,23 @@
           <p>Страна: {{country}}</p>
         </div>
         <p class="price">{{price}}</p>
-        <pre>{{userId._id}} {{@root.userId}}</pre>
-        
       </div>
       <div class="card-action action">
         <a href="/drugs/{{id}}" target="_blank">Посмотреть</a>
         {{#if @root.isAuth}}
           {{#ifeq userId._id  @root.userId}}
            <a href="/drugs/{{id}}/edit?allow=true">Изменит</a>
+           <a href="/drugs/delete/{{id}}">Удалять</a>
          {{/ifeq}}
+         {{#elseeq userId._id  @root.userId}}
         <form action="/card/add" method="POST">
           <input type="hidden" name="_csrf" value="{{@root.csrf}}">
           <input type="hidden" name="id" value="{{id}}" />
           <button class="btn btn-primary">Купить</button>
         </form>
+        {{/elseeq}}
+        {{else}}
+         <a href="/auth/login#login">Купить</a>
         {{/if}}
       </div>
     </div>

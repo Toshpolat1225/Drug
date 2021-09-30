@@ -1,5 +1,9 @@
 body {
     position: relative;
+    font-family: 'Gemunu Libre', sans-serif;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 31%, rgba(9, 9, 121, 1) 71%, rgba(0, 212, 255, 1) 100%);
+    color: white;
 }
 
 .nav-wrapper {
@@ -112,4 +116,38 @@ body {
 .avatar {
     max-width: 300px;
     height: auto;
+}
+
+.class {
+    width: 100%;
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.blue {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 31%, rgba(9, 9, 121, 1) 71%, rgba(0, 212, 255, 1) 100%);
+}
+
+input,
+select,
+textarea {
+    color: #fff;
+    background-color: rgb(0, 0, 0)
+}
+
+.card {
+    background-color: transparent;
+}
+
+.loginReg {
+    background: transparent;
+}
+
+.loginRegA {
+    color: #fff !important;
+    font-size: 17px !important;
 }

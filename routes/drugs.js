@@ -13,6 +13,7 @@ function isOwner(drug, req) {
 
 router.get('/', async(req, res) => {
     try {
+        const drug = await Drug.findById(req.params.id)
         const drugs = await Drug.find()
             .populate("userId", "email name")
             .select("sort model price img1 img2 img3 amount country")
@@ -23,13 +24,19 @@ router.get('/', async(req, res) => {
             title: 'Лекарственные препараты',
             isDrugs: true,
             userId,
-            drugs // massiv
+            drugs, // massiv
+            drug
         })
     } catch (err) {
         console.log(err);
     }
 
 })
+
+router.get('/delete/:id', async(req, res) => {
+    await Drug.findByIdAndDelete(req.params.id);
+    res.redirect("/drugs")
+});
 
 router.get('/:id', async(req, res) => {
     try {

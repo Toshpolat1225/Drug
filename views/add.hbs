@@ -4,7 +4,7 @@
 {{/if}}
 <hr>
 <form class="addhbs" action="/add" method="POST">
-  <div class="row">
+<div class="container"> <div class="row">
     <div class="input-field col s12">
       <input id="sort" type="text" class="validate" required name="sort" value="{{data.sort}}" />
       <label for="sort">sort</label>
@@ -47,5 +47,6 @@
     </div>
     <input type="hidden" name="_csrf" value="{{csrf}}">
     <button class="btn btn-primary">Отправить</button>
-  </div>
+  </div></div>
+ 
 </form>
